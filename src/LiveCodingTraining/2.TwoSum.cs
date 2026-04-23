@@ -11,6 +11,45 @@ public static partial class LiveCodingPractice
     /// </summary>
     public static int[] TwoSum(int[] numbers, int target)
     {
-        throw new NotImplementedException();
+        var left = 0;
+        var right = numbers.Length - 1;
+
+        while (left < right)
+        {
+            var sum = numbers[left] + numbers[right];
+
+            if (sum == target)
+            {
+                return [left, right];
+            }
+
+            if (sum > target)
+            {
+                --right;
+            }
+            else
+            {
+                ++left;
+            }
+        }
+
+        throw new ArgumentException(null, nameof(target));
+    }
+
+    // O(N*N)
+    public static int[] TwoSum2(int[] numbers, int target)
+    {
+        for (var i = 0; i < numbers.Length; ++i)
+        {
+            for (var j = 0; j < numbers.Length; ++j)
+            {
+                if (numbers[i] + numbers[j] == target)
+                {
+                    return [i, j];
+                }
+            }
+        }
+
+        throw new ArgumentException(null, nameof(target));
     }
 }

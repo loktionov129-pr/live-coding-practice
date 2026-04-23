@@ -14,4 +14,16 @@ public class TwoSumTests
         int[] result = LiveCodingPractice.TwoSum(numbers, target);
         Assert.Equal(expected, result);
     }
+
+    [Fact]
+    public void TwoSum_WithSortedArray_ThrowsException()
+    {
+        // Given
+        var numbers = new[] { 1, 3, 4, 5, 7, 10, 11 };
+        // When
+        var ex = Record.Exception(() => LiveCodingPractice.TwoSum(numbers, 42));
+
+        // Then
+        Assert.IsType<ArgumentException>(ex);
+    }
 }

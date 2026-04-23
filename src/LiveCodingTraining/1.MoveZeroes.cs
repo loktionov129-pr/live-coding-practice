@@ -9,6 +9,26 @@ public static partial class LiveCodingPractice
     /// </summary>
     public static int[] MoveZeroes(int[] arr)
     {
-        throw new NotImplementedException();
+        var arrLength = arr?.Length ?? throw new ArgumentNullException(nameof(arr));
+        var result = new int[arrLength];
+        var resultIdx = 0;
+
+        // Копируем все элементы кроме нулей
+        for (var i = 0; i < arrLength; ++i)
+        {
+            if (arr[i] != 0)
+            {
+                result[resultIdx] = arr[i];
+                ++resultIdx;
+            }
+        }
+
+        // дозаполняем нулями
+        for (; resultIdx < arrLength; ++resultIdx)
+        {
+            result[resultIdx] = 0;
+        }
+
+        return result;
     }
 }

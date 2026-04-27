@@ -9,6 +9,34 @@ public static partial class LiveCodingPractice
     /// </summary>
     public static IEnumerable<TSource> MySkipLast<TSource>(this IEnumerable<TSource> source, int count)
     {
-        throw new NotImplementedException();
+        if (source == null)
+        {
+            throw new ArgumentNullException(nameof(source));
+        }
+
+        if (count <= 0)
+        {
+            foreach (var item in source) yield return item;
+            yield break;
+        }
+
+        var buffer = new TSource[count];
+        var counter = 0;
+        var index = 0;
+
+        foreach (var item in source)
+        {
+            if (counter == count)
+            {
+                yield return buffer[index];
+            }
+            else
+            {
+                counter++;
+            }
+
+            buffer[index] = item;
+            index = (index + 1) % count;
+        }
     }
 }

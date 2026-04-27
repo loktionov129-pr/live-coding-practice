@@ -19,6 +19,21 @@ public static partial class LiveCodingPractice
             yield break;
         }
 
+        if (source is ICollection<TSource> collection)
+        {            
+            int i = 0;
+            int skipCount = collection.Count - count;
+            foreach (var item in source)
+            {
+                if (i >= skipCount)
+                {
+                    yield return item;
+                }
+                i++;
+            }
+            yield break;
+        }
+
         TSource[] buffer = new TSource[count];
         int processed = 0;
         int index = 0;

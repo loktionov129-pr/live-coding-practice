@@ -9,6 +9,33 @@ public static partial class LiveCodingPractice
     /// </summary>
     public static IEnumerable<TSource> MyTakeLast<TSource>(this IEnumerable<TSource> source, int count)
     {
-        throw new NotImplementedException();
+        if (source == null)
+        {
+            throw new ArgumentNullException(nameof(source));
+        }
+
+        if (count <= 0)
+        {
+            yield break;
+        }
+
+        TSource[] buffer = new TSource[count];
+        int processed = 0;
+        int index = 0;
+
+        foreach (var item in source)
+        {
+            buffer[index] = item;
+            index = (index + 1) % count;
+            processed++;
+        }
+
+        int loadedCount = Math.Min(processed, count);
+        int start = processed > count ? index : 0;
+
+        for (int i = 0; i < loadedCount; i++)
+        {
+            yield return buffer[(start + i) % count];
+        }
     }
 }

@@ -15,19 +15,21 @@ public static partial class LiveCodingPractice
         }
 
         var d = new Dictionary<char, char>();
+        var d2 = new Dictionary<char, char>();
 
         for (var i = 0; i < s.Length; ++i)
         {
             var c = s[i];
             var x = t[i];
             var b1 = d.TryGetValue(c, out var v) && v != x;
-            var b2 = d.ContainsValue(x) && d.First(a => a.Value == x).Key != c;
+            var b2 = d2.TryGetValue(x, out var v2) && v2 != c;
             if (b1 || b2)
             {
                 return false;
             }
 
             d[c] = x;
+            d2[x] = c;
         }
 
         return true;

@@ -20,6 +20,26 @@ public static partial class LiveCodingPractice
             yield break;
         }
 
+        if (source is ICollection<TSource> collection)
+        {
+            var countToReturn = collection.Count - count;
+            if (countToReturn <= 0)
+            {
+                yield break;
+            }
+            
+            int i = 0;
+            foreach (var item in source)
+            {
+                if (i >= count)
+                {
+                    yield break;
+                }
+                yield return item;
+                i++;
+            }
+        }
+
         var buffer = new TSource[count];
         var counter = 0;
         var index = 0;
